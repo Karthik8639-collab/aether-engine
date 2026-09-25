@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Engine - Live Telemetry & Compute Topology</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="navbar">
+            <div class="brand">
+                <span class="logo-icon">🌌</span>
+                <h1>Aether Engine <span class="badge">SOTA v0.1.0</span></h1>
+            </div>
+            <div class="status-indicator">
+                <span class="pulse-dot"></span>
+                <span id="connection-status">Live Telemetry Active</span>
+            </div>
+        </header>
+
+        <main class="grid-layout">
+            <div class="card metric-card">
+                <h3>💻 Laptop CPU Utilization</h3>
+                <div class="metric-val" id="cpu-percent">--%</div>
+                <div class="progress-bar"><div class="fill" id="cpu-bar" style="width: 0%;"></div></div>
+            </div>
+
+            <div class="card metric-card">
+                <h3>🧠 Laptop RAM Allocation</h3>
+                <div class="metric-val" id="ram-usage">-- GB / -- GB</div>
+                <div class="progress-bar"><div class="fill" id="ram-bar" style="width: 0%;"></div></div>
+            </div>
+
+            <div class="card metric-card">
+                <h3>🎮 GPU / VRAM Offload State</h3>
+                <div class="metric-val" id="gpu-name">Integrated iGPU</div>
+                <div class="sub-text" id="vram-text">Offloaded VRAM: 0.0 GB</div>
+            </div>
+
+            <div class="card metric-card">
+                <h3>⚡ Mesh Network Latency</h3>
+                <div class="metric-val" id="ping-ms">18.5 ms</div>
+                <div class="sub-text" id="network-status">Zero-Trust P2P Tunnel Active</div>
+            </div>
+
+            <div class="card full-width topology-card">
+                <h2>🖥️ Live Compute Topology & Task Routing</h2>
+                <div class="topology-diagram">
+                    <div class="node local-node">
+                        <div class="node-icon">💻</div>
+                        <div class="node-title">Basic Laptop</div>
+                        <div class="node-desc">Speculative Proxy (INT4 / CPU)</div>
+                    </div>
+                    <div class="tunnel-line">
+                        <div class="data-packet"></div>
+                        <span class="tunnel-label">gRPC / WebRTC Encrypted Mesh</span>
+                    </div>
+                    <div class="node remote-node">
+                        <div class="node-icon">⚡</div>
+                        <div class="node-title">Remote GPU Cluster</div>
+                        <div class="node-desc">High-Precision VRAM Worker</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Aether Engine &copy; 2026 | Zero-Latency Adaptive Edge-Cloud Compute Fabric</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
