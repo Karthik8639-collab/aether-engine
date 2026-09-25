@@ -15,7 +15,15 @@
 
 Instead of traditional screen streaming or running heavy models locally, Aether introduces **Predictive Speculative Offloading** and **Dynamic Layer Slicing**.
 
-+-------------------------------------------------------------------------+ | AETHER LAPTOP CLIENT | | | | +------------------------+ +---------------------------+ | | | Speculative Local Engine| | Adaptive Mesh Orchestrator | | | | (Quantized local proxy)| | (Real-time Telemetry) | | | +-----------+------------+ +-------------+-------------+ | +--------------|-----------------------------------------|----------------+ | | | (0ms Speculative Stream) | (Encrypted P2P Tunnel) v v [Unified Output] <======== Refined Stream ========+ | +-----------------------+-----------------------+ | | +-----------v------------+ +------------v-----------+ | HOME GPU / DESKTOP NODE| | SERVERLESS / COLAB NODE| | (Remote VRAM Worker) | | (Cloud GPU Worker) | +------------------------+ +------------------------+
+
+| Component | Sub-Component / Role | Functionality |
+| :--- | :--- | :--- |
+| **Aether Laptop Client** | Speculative Local Engine | Quantized local proxy providing a 0ms speculative stream |
+| | Adaptive Mesh Orchestrator | Handles real-time telemetry and encrypted P2P tunneling |
+| **Unified Output** | | Receives and combines refined streams from remote nodes |
+| **Remote Workers** | Home GPU / Desktop Node | Remote VRAM worker feeding into the output |
+| | Serverless / Colab Node | Cloud GPU worker feeding into the output |
+
 
 
 ---
@@ -48,3 +56,44 @@ git clone https://github.com/your-username/aether-engine.git
 cd aether-engine
 pip install -e .
 
+
+2. Start a Remote Worker (on your GPU Desktop / Cloud Server)
+aether worker --port 8765 --secret my-secret-key
+
+3. Connect from your Basic Laptop
+aether connect ws://<WORKER-IP>:8765 --secret my-secret-key
+
+4. Run Heavy Tasks
+# Offload heavy Python script
+python examples/01_heavy_python_task.py
+
+# Launch live web dashboard
+aether dashboard --port 8000
+
+
+
+---
+
+### File 2: `LICENSE`
+```text
+MIT License
+
+Copyright (c) 2026 Aether Engine Developers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
